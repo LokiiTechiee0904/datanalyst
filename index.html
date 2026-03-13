@@ -22,6 +22,28 @@
         line-height: 1.6;
       }
 
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.1) 100%);
+        border-bottom: 2px solid #00d4ff;
+        padding: 12px 24px;
+        z-index: 300;
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .instructor-name {
+        color: #00ff88;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+      }
+
       .hero {
         min-height: 100vh;
         display: flex;
@@ -31,6 +53,7 @@
         padding: 24px;
         text-align: center;
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        margin-top: 60px;
       }
 
       .hero h1 {
@@ -51,8 +74,10 @@
       }
 
       nav {
-        position: sticky;
-        top: 0;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
         background-color: rgba(26, 26, 26, 0.95);
         backdrop-filter: blur(10px);
         padding: 16px;
@@ -64,7 +89,7 @@
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 12px;
       }
 
@@ -72,8 +97,8 @@
         background: linear-gradient(135deg, #00d4ff15 0%, #00ff8815 100%);
         border: 1px solid #00d4ff;
         color: #00d4ff;
-        padding: 12px 16px;
-        font-size: 14px;
+        padding: 10px 14px;
+        font-size: 12px;
         font-weight: 600;
         cursor: pointer;
         border-radius: 8px;
@@ -213,6 +238,25 @@
         color: #00ff88;
       }
 
+      .character-container {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 250;
+        width: 200px;
+        height: 280px;
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 4px 8px rgba(0, 212, 255, 0.3));
+      }
+
+      .left-eye, .right-eye {
+        transition: all 0.2s ease;
+      }
+
       @media (max-width: 768px) {
         .nav-container {
           grid-template-columns: 1fr;
@@ -225,26 +269,43 @@
         .modal {
           padding: 16px;
         }
+
+        .top-bar {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .character-container {
+          width: 120px;
+          height: 160px;
+          bottom: 10px;
+          left: 10px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="hero">
-      <h1>The Data Analyst Roadmap</h1>
-      <p>Your complete guide to becoming a skilled data analyst. Learn the process, mindset, and tools you need to turn raw data into meaningful insights.</p>
+    <div class="top-bar">
+      <h1 style="font-size: 1.5rem; background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0;">EXPLORING DATA ANALYSIS</h1>
+      <div class="instructor-name">LOGESHWARAN S</div>
     </div>
 
     <nav>
       <div class="nav-container">
         <button class="nav-btn" onclick="openModal('process')">The Process</button>
         <button class="nav-btn" onclick="openModal('mindset')">The Mindset</button>
-        <button class="nav-btn" onclick="openModal('technical')">Technical Concepts</button>
-        <button class="nav-btn" onclick="openModal('databases')">Database Types</button>
+        <button class="nav-btn" onclick="openModal('technical')">Technical</button>
+        <button class="nav-btn" onclick="openModal('databases')">Databases</button>
         <button class="nav-btn" onclick="openModal('sql')">SQL & PL/SQL</button>
-        <button class="nav-btn" onclick="openModal('nosql')">NoSQL & MongoDB</button>
-        <button class="nav-btn" onclick="openModal('python')">Python & Power BI</button>
+        <button class="nav-btn" onclick="openModal('nosql')">NoSQL</button>
+        <button class="nav-btn" onclick="openModal('python')">Python & BI</button>
       </div>
     </nav>
+
+    <div class="hero">
+      <h1>The Data Analyst - YOUR COMPREHENSIVE GUIDE</h1>
+      <p>Your complete guide to becoming a skilled data analyst. Learn the process, mindset, and tools you need to turn raw data into meaningful insights.</p>
+    </div>
 
     <div id="modal-process" class="modal">
       <div class="modal-content">
@@ -424,21 +485,45 @@
     </footer>
 
     <script>
+      const eyePositions = {
+        'process': { leftX: 80, leftY: 65, rightX: 125, rightY: 65 },
+        'mindset': { leftX: 75, leftY: 70, rightX: 130, rightY: 70 },
+        'technical': { leftX: 82, leftY: 63, rightX: 123, rightY: 63 },
+        'databases': { leftX: 85, leftY: 62, rightX: 120, rightY: 62 },
+        'sql': { leftX: 78, leftY: 68, rightX: 127, rightY: 68 },
+        'nosql': { leftX: 72, leftY: 72, rightX: 133, rightY: 72 },
+        'python': { leftX: 88, leftY: 60, rightX: 117, rightY: 60 },
+        'default': { leftX: 77.5, leftY: 70, rightX: 122.5, rightY: 70 }
+      };
+
       function openModal(id) {
         document.getElementById('modal-' + id).classList.add('active');
         document.body.style.overflow = 'hidden';
+        updateEyePosition(id);
       }
 
       function closeModal(id) {
         document.getElementById('modal-' + id).classList.remove('active');
         document.body.style.overflow = 'auto';
+        updateEyePosition('default');
+      }
+
+      function updateEyePosition(topic) {
+        const pos = eyePositions[topic] || eyePositions['default'];
+        const leftEye = document.querySelector('.left-eye');
+        const rightEye = document.querySelector('.right-eye');
+
+        if (leftEye) leftEye.setAttribute('cx', pos.leftX);
+        if (leftEye) leftEye.setAttribute('cy', pos.leftY);
+        if (rightEye) rightEye.setAttribute('cx', pos.rightX);
+        if (rightEye) rightEye.setAttribute('cy', pos.rightY);
       }
 
       document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', function(e) {
           if (e.target === this) {
-            this.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            const id = this.id.replace('modal-', '');
+            closeModal(id);
           }
         });
       });
@@ -446,10 +531,21 @@
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           document.querySelectorAll('.modal.active').forEach(modal => {
-            modal.classList.remove('active');
+            const id = modal.id.replace('modal-', '');
+            closeModal(id);
           });
-          document.body.style.overflow = 'auto';
         }
+      });
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('mouseover', function() {
+          const topic = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+          updateEyePosition(topic);
+        });
+      });
+
+      document.addEventListener('mouseleave', function() {
+        updateEyePosition('default');
       });
     </script>
   </body>
