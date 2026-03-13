@@ -5,6 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Data Analyst Roadmap</title>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
     <style>
       * {
         margin: 0;
@@ -14,12 +17,7 @@
 
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        /* Modified background properties */
-        background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), url('background.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
+        background-color: #1a1a1a;
         color: #ffffff;
         line-height: 1.6;
       }
@@ -29,7 +27,7 @@
         top: 0;
         left: 0;
         right: 0;
-        background: rgba(26, 26, 26, 0.9);
+        background: linear-gradient(90deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.1) 100%);
         border-bottom: 2px solid #00d4ff;
         padding: 12px 24px;
         z-index: 300;
@@ -43,6 +41,7 @@
         color: #00ff88;
         font-weight: 700;
         font-size: 1.1rem;
+        letter-spacing: 0.5px;
       }
 
       .hero {
@@ -53,6 +52,7 @@
         align-items: center;
         padding: 24px;
         text-align: center;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         margin-top: 60px;
       }
 
@@ -63,12 +63,14 @@
         background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .hero p {
         font-size: clamp(1rem, 2.5vw, 1.25rem);
-        color: #e0e0e0;
+        color: #b0b0b0;
         max-width: 600px;
+        line-height: 1.5;
       }
 
       nav {
@@ -76,7 +78,7 @@
         top: 60px;
         left: 0;
         right: 0;
-        background-color: rgba(26, 26, 26, 0.85);
+        background-color: rgba(26, 26, 26, 0.95);
         backdrop-filter: blur(10px);
         padding: 16px;
         border-bottom: 1px solid #333;
@@ -92,7 +94,7 @@
       }
 
       .nav-btn {
-        background: rgba(0, 212, 255, 0.1);
+        background: linear-gradient(135deg, #00d4ff15 0%, #00ff8815 100%);
         border: 1px solid #00d4ff;
         color: #00d4ff;
         padding: 10px 14px;
@@ -102,11 +104,13 @@
         border-radius: 8px;
         transition: all 0.3s ease;
         text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       .nav-btn:hover {
-        background: rgba(0, 212, 255, 0.2);
+        background: linear-gradient(135deg, #00d4ff25 0%, #00ff8825 100%);
         transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
       }
 
       .modal {
@@ -118,6 +122,7 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         z-index: 200;
+        overflow-y: auto;
         padding: 24px;
       }
 
@@ -128,13 +133,26 @@
       }
 
       .modal-content {
-        background: #1a1a1a;
+        background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
         border: 2px solid #00d4ff;
         border-radius: 16px;
         padding: 32px;
         max-width: 800px;
         width: 100%;
         position: relative;
+        box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .close-btn {
@@ -146,19 +164,129 @@
         color: #00ff88;
         font-size: 32px;
         cursor: pointer;
+        line-height: 1;
+        transition: transform 0.2s;
+      }
+
+      .close-btn:hover {
+        transform: rotate(90deg);
+      }
+
+      .modal-content h2 {
+        color: #00d4ff;
+        margin-bottom: 24px;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        padding-bottom: 12px;
+        border-bottom: 2px solid #00ff88;
+      }
+
+      .modal-content h3 {
+        color: #00ff88;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+      }
+
+      .modal-content p,
+      .modal-content li {
+        color: #e0e0e0;
+        margin-bottom: 12px;
+        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        line-height: 1.5;
+      }
+
+      .modal-content ul {
+        margin-left: 24px;
+        margin-bottom: 16px;
+      }
+
+      .modal-content li {
+        margin-bottom: 8px;
+      }
+
+      .modal-content strong {
+        color: #00d4ff;
+      }
+
+      .highlight {
+        background-color: rgba(0, 212, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #00ff88;
       }
 
       footer {
-        background-color: rgba(26, 26, 26, 0.9);
+        background-color: #1a1a1a;
         border-top: 1px solid #333;
         padding: 32px 24px;
         text-align: center;
+      }
+
+      footer p {
+        color: #b0b0b0;
+        margin-bottom: 16px;
+      }
+
+      footer a {
+        color: #00d4ff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: #00ff88;
+      }
+
+      .character-container {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 250;
+        width: 200px;
+        height: 280px;
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 4px 8px rgba(0, 212, 255, 0.3));
+      }
+
+      .left-eye, .right-eye {
+        transition: all 0.2s ease;
+      }
+
+      @media (max-width: 768px) {
+        .nav-container {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-content {
+          padding: 24px 16px;
+        }
+
+        .modal {
+          padding: 16px;
+        }
+
+        .top-bar {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .character-container {
+          width: 120px;
+          height: 160px;
+          bottom: 10px;
+          left: 10px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="top-bar">
-      <h1 style="font-size: 1.5rem; background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EXPLORING DATA ANALYSIS</h1>
+      <h1 style="font-size: 1.5rem; background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0;">EXPLORING DATA ANALYSIS</h1>
       <div class="instructor-name">LOGESHWARAN S</div>
     </div>
 
@@ -166,7 +294,7 @@
       <div class="nav-container">
         <button class="nav-btn" onclick="openModal('process')">Data Analysis?</button>
         <button class="nav-btn" onclick="openModal('mindset')">Mindset > Skillset</button>
-        <button class="nav-btn" onclick="openModal('technical')">Technical Keywords</button>
+        <button class="nav-btn" onclick="openModal('technical')">Techincal Keywords</button>
         <button class="nav-btn" onclick="openModal('databases')">Databases</button>
         <button class="nav-btn" onclick="openModal('sql')">SQL & PL/SQL</button>
         <button class="nav-btn" onclick="openModal('nosql')">NoSQL</button>
@@ -178,10 +306,247 @@
       <h1>The Data Analyst - YOUR COMPREHENSIVE GUIDE</h1>
       <p>Your complete guide to becoming a skilled data analyst. Learn the process, mindset, and tools you need to turn raw data into meaningful insights.</p>
     </div>
-    
+
+    <div id="modal-process" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('process')">&times;</button>
+        <h2>The Data Analysis Process</h2>
+        <p>Data Analysis is the process of collecting, cleaning, and studying data to find useful insights, patterns, and trends that help in making better decisions.</p>
+
+        <h3>Key Steps:</h3>
+        <ul>
+          <li><strong>Data Gathering:</strong> Collecting raw information from various sources</li>
+          <li><strong>Cleaning:</strong> Removing errors and organizing the data properly</li>
+          <li><strong>Pattern Recognition:</strong> Studying the data to identify trends and patterns</li>
+          <li><strong>Decision Making:</strong> Using insights to make better, informed choices</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="modal-mindset" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('mindset')">&times;</button>
+        <h2>The Right Mindset</h2>
+
+        <h3>Mindset is Greater Than Skillset</h3>
+        <p>You can't grow with a bad mindset even with excellent skills. The right mindset is essential for success in data analysis.</p>
+
+        <h3>Growth Mindset vs. Fixed Mindset</h3>
+        <p>A <span class="highlight">growth mindset</span> believes abilities can be developed through dedication and hard work. A <span class="highlight">fixed mindset</span> believes abilities are static and can't be changed.</p>
+
+        <h3>Why Learn Data Analysis?</h3>
+        <p>According to the <strong>World Economic Forum (WEF)</strong>, AI won't replace Data Analyst roles as per recent research. This field offers strong career opportunities and continues to grow in importance.</p>
+      </div>
+    </div>
+
+    <div id="modal-technical" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('technical')">&times;</button>
+        <h2>Technical Concepts</h2>
+
+        <h3>What is Data?</h3>
+        <p>Data means <span class="highlight">"Information"</span>. For example: Name: Logesh, Age: 26</p>
+
+        <h3>What is a Database?</h3>
+        <p>A <strong>Database</strong> is a collection of data where you can:</p>
+        <ul>
+          <li>Store the data</li>
+          <li>Retrieve the data</li>
+          <li>Update the data through SQL Query</li>
+        </ul>
+        <p><em>Examples:</em> Name: Logesh, Age: 26 | Name: Mahesh, Age: 22 | Name: Krishna, Age: 46</p>
+
+        <h3>What is DBMS?</h3>
+        <p><strong>DBMS</strong> stands for <span class="highlight">"Database Management System"</span>. It is a software application that interacts with the user and the database.</p>
+        <p><strong>Examples:</strong> Oracle SQL, MySQL, MongoDB</p>
+        <p><strong>Important Note:</strong> We can't directly interact with the database, but we can do it with the help of DBMS.</p>
+      </div>
+    </div>
+
+    <div id="modal-databases" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('databases')">&times;</button>
+        <h2>Types of Databases</h2>
+
+        <h3>Relational Database (RDBMS)</h3>
+        <p><strong>Structured Data (SQL)</strong></p>
+        <p>RDBMS stands for Relational Database Management System. It's a perfect example for structured data storage, like storing data in Excel format.</p>
+        <p><strong>Example:</strong> SQL - Perfect for structured data base</p>
+
+        <h3>Non-Relational Database (NRDBMS)</h3>
+        <p><strong>Unstructured Data (MongoDB)</strong></p>
+        <p>NRDBMS stands for Non-Relational Database Management System. It's a perfect example for unstructured database storage.</p>
+        <p><strong>Example:</strong> MongoDB - Perfect for unstructured data</p>
+
+        <h3>Database Layers</h3>
+        <ul>
+          <li><strong>External Level / View Layer:</strong> UI (Customized View) - What users see</li>
+          <li><strong>Conceptual Level / Logical Layer:</strong> Contains logic in rows and columns - Where data analysts work</li>
+          <li><strong>Internal Level / Physical Layer:</strong> How data is actually stored in memory/disc</li>
+        </ul>
+        <p><em>As a Data Analyst, we will work in the Conceptual Level / Logical Layer.</em></p>
+      </div>
+    </div>
+
+    <div id="modal-sql" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('sql')">&times;</button>
+        <h2>SQL & PL/SQL</h2>
+
+        <h3>SQL (Structured Query Language)</h3>
+        <p>SQL is mainly used to <span class="highlight">"Communicate with Database"</span>. It allows you to store, manage, and retrieve data from relational databases.</p>
+
+        <h3>SQL PLUS (Tool)</h3>
+        <p>SQL Tool is used to optimize and manage SQL Queries in a database. It makes it easier to:</p>
+        <ul>
+          <li>Create tables</li>
+          <li>Insert data</li>
+          <li>Run queries</li>
+          <li>Manage database</li>
+        </ul>
+
+        <h3>SQL LOADER</h3>
+        <p>SQL LOADER is used to load or insert bulk data into tables from external files like CSV or text files.</p>
+        <p><strong>Benefit:</strong> Handling more data with less time</p>
+        <p><em>Example: Insert 10k to 50k data into a table at a time</em></p>
+
+        <h3>PL/SQL (Procedural Language SQL)</h3>
+        <p>PL/SQL is Oracle's Procedural Extension of SQL. It allows:</p>
+        <ul>
+          <li>Running queries in blocks (Begin & End) to execute multiple queries at once</li>
+          <li>Writing programs with variables, loops, conditions, and error handling inside the database</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="modal-nosql" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('nosql')">&times;</button>
+        <h2>NoSQL & MongoDB</h2>
+
+        <h3>What is MongoDB?</h3>
+        <p>MongoDB is a <span class="highlight">"NO SQL Database"</span> used to store unstructured data and manage large amounts of data in flexible, JSON, and document-based formats.</p>
+
+        <h3>Why Use MongoDB?</h3>
+        <p>It is widely used for <strong>big data</strong> and modern web applications because of its:</p>
+        <ul>
+          <li><strong>Scalability:</strong> Can handle growing amounts of data</li>
+          <li><strong>Flexibility:</strong> Works with different data structures</li>
+        </ul>
+
+        <h3>MongoDB Structure</h3>
+        <p><strong>Database → Collection → Document</strong></p>
+        <p><em>Example Collection:</em> Students</p>
+        <p><em>Example Document inside the collection:</em></p>
+        <p style="background: #2d2d2d; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+          {<br>
+          &nbsp;&nbsp;name: "Logesh",<br>
+          &nbsp;&nbsp;age: "26",<br>
+          &nbsp;&nbsp;course: "Data Analyst"<br>
+          }
+        </p>
+
+        <h3>Unstructured Data Format</h3>
+        <p>JSON examples:</p>
+        <ul>
+          <li>{"name": "Logesh", "age": 26}</li>
+          <li>{"name": "Mahesh", "age": 22, "Course": "IT"}</li>
+        </ul>
+        <p>MongoDB is designed for <strong>fast data access</strong> and <strong>large-scale applications</strong>.</p>
+      </div>
+    </div>
+
+    <div id="modal-python" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('python')">&times;</button>
+        <h2>Python & Power BI</h2>
+
+        <h3>Python for Data Analysis</h3>
+        <p>Python is the most popular programming language used by data analysts to collect, clean, analyze, and visualize data.</p>
+
+        <h3>Python Data Analysis Libraries</h3>
+        <ul>
+          <li><strong>Pandas:</strong> Used for data manipulation and analysis</li>
+          <li><strong>NumPy:</strong> Used for numerical and mathematical operations</li>
+          <li><strong>Matplotlib:</strong> Used for creating charts and graphs</li>
+          <li><strong>Seaborn:</strong> Used for advanced data visualization</li>
+        </ul>
+
+        <h3>Power BI</h3>
+        <p>Power BI mainly helps to convert <span class="highlight">"raw data into visualization dashboards and reports"</span>.</p>
+        <p><strong>Examples:</strong> Charts, Graphs</p>
+        <p>It's a powerful tool for presenting data insights in a visual, easy-to-understand format.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Built with HTML, CSS, and JavaScript</p>
+      <p><a href="#" target="_blank">View Source Code on GitHub</a></p>
+    </footer>
+
     <script>
-        function openModal(id) { document.getElementById('modal-' + id).classList.add('active'); }
-        function closeModal(id) { document.getElementById('modal-' + id).classList.remove('active'); }
+      const eyePositions = {
+        'process': { leftX: 80, leftY: 65, rightX: 125, rightY: 65 },
+        'mindset': { leftX: 75, leftY: 70, rightX: 130, rightY: 70 },
+        'technical': { leftX: 82, leftY: 63, rightX: 123, rightY: 63 },
+        'databases': { leftX: 85, leftY: 62, rightX: 120, rightY: 62 },
+        'sql': { leftX: 78, leftY: 68, rightX: 127, rightY: 68 },
+        'nosql': { leftX: 72, leftY: 72, rightX: 133, rightY: 72 },
+        'python': { leftX: 88, leftY: 60, rightX: 117, rightY: 60 },
+        'default': { leftX: 77.5, leftY: 70, rightX: 122.5, rightY: 70 }
+      };
+
+      function openModal(id) {
+        document.getElementById('modal-' + id).classList.add('active');
+        document.body.style.overflow = 'hidden';
+        updateEyePosition(id);
+      }
+
+      function closeModal(id) {
+        document.getElementById('modal-' + id).classList.remove('active');
+        document.body.style.overflow = 'auto';
+        updateEyePosition('default');
+      }
+
+      function updateEyePosition(topic) {
+        const pos = eyePositions[topic] || eyePositions['default'];
+        const leftEye = document.querySelector('.left-eye');
+        const rightEye = document.querySelector('.right-eye');
+
+        if (leftEye) leftEye.setAttribute('cx', pos.leftX);
+        if (leftEye) leftEye.setAttribute('cy', pos.leftY);
+        if (rightEye) rightEye.setAttribute('cx', pos.rightX);
+        if (rightEye) rightEye.setAttribute('cy', pos.rightY);
+      }
+
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            const id = this.id.replace('modal-', '');
+            closeModal(id);
+          }
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal.active').forEach(modal => {
+            const id = modal.id.replace('modal-', '');
+            closeModal(id);
+          });
+        }
+      });
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('mouseover', function() {
+          const topic = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+          updateEyePosition(topic);
+        });
+      });
+
+      document.addEventListener('mouseleave', function() {
+        updateEyePosition('default');
+      });
     </script>
   </body>
 </html>
